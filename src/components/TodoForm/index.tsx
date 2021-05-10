@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
+// type MyFormProps = {
+//   onSubmit : (form: { value: string}) => void;
+// }
+
 function TodoForm(props: any) {
   const { onInsert } = props;
   const [value, setValue] = useState("");
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     onInsert(value);
     setValue("");
     e.preventDefault();
