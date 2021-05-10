@@ -1,33 +1,43 @@
 import React, { useState } from "react";
 
-// type MyFormProps = {
-//   onSubmit : (form: { value: string}) => void;
-// }
+interface TodoFormProps {
+  addTodo: AddTodo;
+}
 
-function TodoForm(props: any) {
-  const { onInsert } = props;
-  const [value, setValue] = useState("");
+const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
+  const [newTodo, setNewTodo] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setNewTodo(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    onInsert(value);
-    setValue("");
     e.preventDefault();
+    if (!newTodo) return;
+    addTodo(newTodo);
+    // onInsert(value);
+    setNewTodo("");
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter") {
+      addTodo(newTodo);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        value={value}
+        type="text"
+        value={newTodo}
         onChange={handleChange}
         placeholder="할 일을 입력하세요"
       />
-      <button>추가</button>
+      <button type="submit" onKeyPress={handleKeyPress}>
+        추가
+      </button>
     </form>
   );
-}
+};
 
 export default TodoForm;

@@ -1,12 +1,12 @@
-import React, { ReactElement, MouseEvent, ButtonHTMLAttributes } from "react";
+import React, { ReactElement } from "react";
 
 interface TodoItemProps {
   todo: Todo;
   onToggle: ToggleTodo;
-  // onRemove: (id: number) => void;
+  onRemove: RemoveTodo;
 }
 const TodoItem = (props: TodoItemProps): ReactElement => {
-  const { todo, onToggle } = props;
+  const { todo, onToggle, onRemove } = props;
 
   return (
     <div>
@@ -20,11 +20,11 @@ const TodoItem = (props: TodoItemProps): ReactElement => {
       </button> */}
       <span
         style={{ textDecoration: todo.done ? "line-through" : "none" }}
-        onClick={() => onToggle(todo)}
+        onClick={() => onToggle(todo.id)}
       >
         {todo.text}
       </span>
-      <button>삭제</button>
+      <button onClick={() => onRemove(todo.id)}>삭제</button>
     </div>
   );
 };

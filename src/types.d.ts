@@ -4,4 +4,8 @@ type Todo = {
   done: boolean;
 };
 
-type ToggleTodo = (selectedTodo: Todo) => void;
+type AddTodo = (newTodo: string) => void;
+
+type ToggleTodo = (id: number) => void;
+
+type RemoveTodo = (id: number) => void;
