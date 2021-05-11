@@ -19,6 +19,7 @@ const TodoItem = (props: TodoItemProps): ReactElement => {
         <img src="./img/check.png" />
       </button> */}
       <span
+        data-testid="todo-text"
         style={{ textDecoration: todo.done ? "line-through" : "none" }}
         onClick={() => onToggle(todo.id)}
       >
